@@ -4,65 +4,194 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Home · Taqathon</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <!-- Bootstrap 5 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
   <style>
-    :root{
-      --brand-green:#20c997;
-      --brand-blue:#007dfd;
-      --band-grad: linear-gradient(90deg, var(--brand-green), var(--brand-blue));
+  :root{
+    --brand-blue:#007DFD;
+    --brand-green:#09C899;
+    --brand-dark:#00284C;
+    --brand-grad: linear-gradient(90deg, var(--brand-green), var(--brand-blue));
+    --text:#1d2733;
+    --muted:#66768a;
+  }
+
+  html,body{
+    font-family: Poppins, Cairo, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color:var(--text);
+    background:#f8fbfd;
+  }
+
+  .rounded-2xl{ border-radius: 1rem; }
+  .shadow-soft{ box-shadow: 0 10px 30px rgba(0,0,0,.12); }
+  .badge-soft{ background:rgba(9,200,153,.15); color:#0a7b60; border:1px solid rgba(9,200,153,.3); }
+
+  /* Gradient band and CTA */
+  .gb-band{ background: var(--brand-grad); }
+  .cta-band{ background: var(--brand-grad); color:#042233; }
+  .cta-band .btn{ background:#fff; border:0; color:#042233; font-weight:600; }
+
+  /* Countdown tiles */
+  .count-tile{
+    background: rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.35);
+    color:#fff; border-radius:.75rem; width:56px; height:56px;
+    display:flex; align-items:center; justify-content:center; font-weight:700;
+    box-shadow:0 6px 18px rgba(0,0,0,.06);
+  }
+  .count-label{ font-size:.8rem; color: rgba(255,255,255,.9); }
+
+  /* Announcement pills */
+  .announce-pill{
+    background:#fff; border:1px solid #d6e8ff; color:#164a86; border-radius:.75rem; padding:.75rem 1rem;
+  }
+  .announce-pill.border-success{ border-color:#bfeee1; color:#0a7b60; }
+  .announce-pill.border-warning{ border-color:#ffe5b7; color:#8a5a14; }
+  .announce-pill.border-info{ border-color:#bedbff; color:#164a86; }
+  .announce-pill.border-danger{ border-color:#ffd0d0; color:#8e2121; }
+
+  /* About section */
+  .about-list .bi{ color: var(--brand-green); margin-right:.5rem; }
+
+  /* Footer */
+  footer{ background: var(--brand-dark); color:#cfd6df; }
+  footer a{ color:#cfd6df; text-decoration:none; }
+
+  /* General elements */
+  .hero-img{ border-radius: 1rem; box-shadow: 0 18px 40px rgba(0,0,0,.18); }
+  .text-secondary{ color:var(--muted)!important; }
+
+  /* Buttons */
+  .btn-brand{
+    background:var(--brand-blue);
+    border-color:var(--brand-blue);
+    color:#fff;
+  }
+  .btn-brand:hover{ filter:brightness(.95); }
+
+   /* Navbar */
+    .navbar{
+      background:#fff;
+      box-shadow:0 2px 10px rgba(0,0,0,.04);
+      padding-top:.4rem;
+      padding-bottom:.4rem;
     }
-    body{ background:#f8fafb; }
-    .rounded-2xl{ border-radius: 1rem; }
-    .shadow-soft{ box-shadow: 0 10px 30px rgba(0,0,0,.12); }
-    .badge-soft{ background:rgba(32,201,151,.15); color:#187a5b; border:1px solid rgba(32,201,151,.25); }
-    .gb-band{ background: var(--band-grad); }
-    .count-tile{
-      background: rgba(255,255,255,.15);
-      border:1px solid rgba(255,255,255,.35);
-      color:#fff;
-      border-radius:.75rem; width:56px; height:56px;
-      display:flex; align-items:center; justify-content:center; font-weight:700;
-      box-shadow:0 6px 18px rgba(0,0,0,.06);
+
+    .logo-mark{
+      height:60px;
+      width:auto;
+      object-fit:contain;
     }
-    .count-label{ font-size:.8rem; color: rgba(255,255,255,.9); }
-    .announce-pill{
-      background:#fff; border:1px solid #cde7da; color:#2a7a5b; border-radius: .75rem; padding:.75rem 1rem;
+
+    .assoc-logo{
+      height:48px;
+      width:auto;
+      object-fit:contain;
     }
-    .about-list .bi{ color: var(--brand-green); margin-right:.5rem; }
-    .cta-band{ background: var(--band-grad); color:#062a36; }
-    .cta-band .btn{ background:#fff; border:0; color:#062a36; font-weight:600; }
-    footer{ background: linear-gradient(180deg,#0f1720,#0b1219); color:#cfd6df; }
-    footer a{ color:#cfd6df; text-decoration:none; }
-    .hero-img{ border-radius: 1rem; box-shadow: 0 18px 40px rgba(0,0,0,.18); }
-    .navbar-light .navbar-nav .nav-link.active{ font-weight:600; }
-  
-    .lang-toggle{ margin-inline-start:auto; }
-    </style>
+
+    .navbar-brand img{
+      vertical-align:middle;
+    }
+
+    .navbar-nav .nav-link{
+      font-weight:500;
+      color:var(--dark-blue);
+      transition:.2s;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active{
+      color:var(--brand-blue);
+    }
+
+    .btn-brand{
+      background:var(--brand-blue);
+      color:#fff !important;
+      border:none;
+      border-radius:.4rem;
+      padding:.4rem .9rem;
+      font-weight:500;
+    }
+
+    .btn-brand:hover{
+      opacity:.9;
+    }
+
+/* Hero image (consolidated once) */
+.hero-img{
+  display:block;
+  width:100%;
+  height:clamp(260px, 35vw, 520px);
+  object-fit:cover;
+  object-position:center;
+  border-radius:1rem;
+  box-shadow:0 18px 40px rgba(0,0,0,.18);
+}
+
+/* (Removed the unused `.hero .col-lg-6 { display:block; }` rule) */
+/* === AR language button === */
+.btn-lang{
+  background:var(--brand-grad);                    /* gradient background */
+  color:#ffffff !important;           /* white text */
+  border:none;           
+  border-radius:.4rem;
+  padding:.35rem .9rem;
+  font-weight:500;
+  transition:.2s;
+}
+
+.btn-lang:hover{
+  background:#09C899;                 /* brand green on hover */
+  color:#fff !important;              /* white text when hovered */
+  border-color:#09C899;
+}
+
+
+</style>
+
 </head>
 <body>
-  <!-- NAV -->
-  <nav class="navbar navbar-expand-lg bg-white border-bottom navbar-light sticky-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">
-        <img src="https://dummyimage.com/28x28/20c997/ffffff.png&text=T" class="rounded-circle me-2" width="28" height="28" alt="">Taqathon
+    <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <!-- Left: Taqathon logo -->
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="assets/taqathon-logo.png" alt="Taqathon logo" class="logo-mark">
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+
+      <!-- Navbar links (center) -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+              aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="nav">
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+
+      <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+        <ul class="navbar-nav mb-2 mb-lg-0 align-items-lg-center">
           <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="contract.html">Contract</a></li>
           <li class="nav-item"><a class="nav-link" href="schedule.html">Schedule & Workshops</a></li>
           <li class="nav-item"><a class="nav-link" href="submissions.html">Submissions</a></li>
           <li class="nav-item"><a class="nav-link" href="rules.html">Rules & Resources</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
-          <li class="nav-item ms-lg-2"><a class="btn btn-sm btn-outline-secondary" href="index-ar.html">AR</a></li>
+          <li class="nav-item ms-3">
+  <a class="btn btn-sm btn-lang" href="index-ar.html">AR</a>
+</li>
+
         </ul>
       </div>
+
+      <!-- Right: Association logo (always visible) -->
+      <a href="https://taqa.org.sa" target="_blank" rel="noopener" class="d-none d-lg-block">
+        <img src="assets/association-logo.png" alt="Energy Association for Sustainable Development" class="assoc-logo">
+      </a>
+
     </div>
   </nav>
 
@@ -71,67 +200,51 @@
     <div class="container">
       <div class="row g-4 align-items-center">
         <div class="col-lg-6">
-          <span class="badge badge-soft">Registration Open</span>
-          <h1 class="mt-3 mb-2">Taqathon</h1>
-          <h6 class="text-secondary mb-3">The Energy Hackathon</h6>
+          <span class="badge badge-soft">Participant Portal</span>
+          <h1 class="mt-3 mb-2">Taqathon 2025</h1>
+          <h6 class="text-secondary mb-3">Saudi Arabia’s National Energy Hackathon</h6>
           <p class="text-secondary">
-            Join Saudi Arabia’s premier energy innovation challenge. Organized by the Energy Association for Sustainable Development, Taqathon brings together brilliant minds to create sustainable solutions aligned with Vision 2030.
+            This portal is for selected participants. Access workshop links and schedule, read the rules and resources,
+            and submit your projects on time. Organized by the Energy Association for Sustainable Development
+            and aligned with Saudi Vision 2030.
           </p>
           <div class="d-flex flex-wrap gap-2 mt-3">
             <a class="btn btn-success" href="contract.html"><i class="bi bi-file-earmark-text me-1"></i> Sign Contract</a>
             <a class="btn btn-outline-secondary" href="rules.html"><i class="bi bi-journal-text me-1"></i> View Rules</a>
-            <a class="btn btn-primary" href="submissions.html"><i class="bi bi-rocket-takeoff me-1"></i> Submit Project</a>
+            <a class="btn btn-brand text-white" href="submissions.html"><i class="bi bi-rocket-takeoff me-1"></i> Submit Project</a>
           </div>
         </div>
         <div class="col-lg-6">
-          <img class="w-100 hero-img" src="https://www.computersciencedegreehub.com/wp-content/uploads/2023/02/shutterstock_535124956-1024x756.jpg" alt="Wind turbine">
+          <img class="w-100 hero-img"
+     src="assets/hero-wind.jpg"
+     alt="Wind turbines in Saudi Arabia generating clean energy"
+     loading="eager"
+     decoding="async"
+     width="1600"
+     height="1000">
         </div>
       </div>
     </div>
   </section>
 
   <!-- GRADIENT BAND + COUNTDOWN -->
-  
   <section class="gb-band py-5">
     <div class="container text-center text-white">
-      <div class="mb-2 fw-semibold">Submission Deadline</div>
-      <div id="deadline" class="d-flex justify-content-center align-items-center gap-3" data-deadline="2025-12-15T23:59:59+03:00">
-        <div class="text-center">
-          <div class="count-tile"><span id="ddays">00</span></div>
-          <div class="count-label">Days</div>
-        </div>
-        <div class="text-center">
-          <div class="count-tile"><span id="dhours">00</span></div>
-          <div class="count-label">Hours</div>
-        </div>
-        <div class="text-center">
-          <div class="count-tile"><span id="dmins">00</span></div>
-          <div class="count-label">Mins</div>
-        </div>
-        <div class="text-center">
-          <div class="count-tile"><span id="dsecs">00</span></div>
-          <div class="count-label">Secs</div>
-        </div>
+      <div class="mb-2 fw-semibold">Final Submission Deadline</div>
+      <div id="deadline" class="d-flex justify-content-center align-items-center gap-3" data-deadline="2025-11-29T23:59:59+03:00">
+        <div class="text-center"><div class="count-tile"><span id="ddays">00</span></div><div class="count-label">Days</div></div>
+        <div class="text-center"><div class="count-tile"><span id="dhours">00</span></div><div class="count-label">Hours</div></div>
+        <div class="text-center"><div class="count-tile"><span id="dmins">00</span></div><div class="count-label">Mins</div></div>
+        <div class="text-center"><div class="count-tile"><span id="dsecs">00</span></div><div class="count-label">Secs</div></div>
       </div>
     </div>
   </section>
-
 
   <!-- ANNOUNCEMENTS -->
   <section class="py-4">
     <div class="container">
       <div class="text-center text-secondary mb-3">Announcements</div>
-      <div class="row g-3">
-        <div class="col-md-4">
-          <div class="announce-pill">Welcome to Taqathon 2025! Registration is now open.</div>
-        </div>
-        <div class="col-md-4">
-          <div class="announce-pill">Workshop schedule has been updated. Check the Schedule page.</div>
-        </div>
-        <div class="col-md-4">
-          <div class="announce-pill">Submission portal is now live. Submit your projects before the deadline.</div>
-        </div>
-      </div>
+      <div id="ann-wrap" class="row g-3"><!-- Pills injected via JS --></div>
     </div>
   </section>
 
@@ -140,21 +253,29 @@
     <div class="container">
       <div class="row g-4 align-items-center">
         <div class="col-lg-6">
-          <img class="w-100 rounded-2xl shadow-soft" src="https://www.computersciencedegreehub.com/wp-content/uploads/2023/02/shutterstock_535124956-1024x756.jpg" alt="Event">
+          <img class="w-100 rounded-4 shadow-sm"
+     src="assets/about-solar.jpg"
+     alt="Aerial view of solar panels in Saudi Arabia"
+     loading="lazy"
+     decoding="async"
+     width="1400"
+     height="500">
+
         </div>
         <div class="col-lg-6">
-          <h5>About Taqathon</h5>
+          <h5>What You’ll Do in Taqathon</h5>
           <p class="text-secondary">
-            Taqathon is a groundbreaking hackathon focused on energy innovation and sustainability. Participants work on cutting-edge solutions to address energy challenges while contributing to Saudi Arabia’s Vision 2030 goals.
+            Work in teams to build practical solutions in renewable energy, energy efficiency, and AI for energy—guided by experts
+            and geared toward real-world adoption in line with Vision 2030.
           </p>
           <div class="row">
             <div class="col-6 about-list">
-              <div class="mb-2"><i class="bi bi-check-circle"></i> Collaborate with industry experts</div>
-              <div class="mb-2"><i class="bi bi-check-circle"></i> Win prizes and recognition</div>
+              <div class="mb-2"><i class="bi bi-check-circle"></i> Expert-led workshops (e.g., KAUST, ARAMCO, SABIC)</div>
+              <div class="mb-2"><i class="bi bi-check-circle"></i> Mentorship and technical guidance</div>
             </div>
             <div class="col-6 about-list">
-              <div class="mb-2"><i class="bi bi-check-circle"></i> Access to cutting-edge resources</div>
-              <div class="mb-2"><i class="bi bi-check-circle"></i> Network with innovators</div>
+              <div class="mb-2"><i class="bi bi-check-circle"></i> Compete for SAR 18k / 12k / 9k prizes</div>
+              <div class="mb-2"><i class="bi bi-check-circle"></i> Potential adoption by major companies</div>
             </div>
           </div>
         </div>
@@ -165,8 +286,8 @@
   <!-- CTA BAND -->
   <section class="cta-band py-5">
     <div class="container text-center">
-      <h6 class="fw-semibold mb-1">Ready to Join the Energy Revolution?</h6>
-      <p class="mb-3">Sign up now and be part of Saudi Arabia’s sustainable future.</p>
+      <h6 class="fw-semibold mb-1">Stay on track</h6>
+      <p class="mb-3">Complete your contract, review the rules, and keep an eye on the schedule and announcements.</p>
       <a class="btn btn-lg" href="contract.html">Get Started Now</a>
     </div>
   </section>
@@ -178,14 +299,6 @@
         <div class="col-md-4">
           <h6 class="mb-3">Taqathon</h6>
           <p class="mb-1 small">Organized by Energy Association for Sustainable Development.</p>
-          <p class="small">Terms of Service</p>
-        </div>
-        <div class="col-md-4">
-          <h6 class="mb-3">Quick Links</h6>
-          <ul class="list-unstyled small">
-            <li><a href="rules.html">Privacy Policy</a></li>
-            <li><a href="rules.html">Terms of Service</a></li>
-          </ul>
         </div>
         <div class="col-md-4">
           <h6 class="mb-3">Follow Us</h6>
@@ -206,15 +319,10 @@
 
   <script>
     // === Countdown ===
-    // Change this if needed (ISO 8601). If null, reads from #deadline[data-deadline].
-    const DEADLINE_ISO = null; // e.g., "2025-12-15T23:59:59+03:00"
     const $wrap = document.getElementById('deadline');
-    const deadline = new Date(DEADLINE_ISO || ($wrap && $wrap.getAttribute('data-deadline')) || '').getTime();
-    const isRTL = document.documentElement.dir === 'rtl';
-    const toEastern = s => s.replace(/[0-9]/g, d => String.fromCharCode('٠'.charCodeAt(0) + (+d)));
+    const deadline = new Date($wrap.getAttribute('data-deadline')).getTime();
     function pad(n){ return (n<10?'0':'') + n; }
     function tick(){
-      if (!deadline || !document.getElementById('ddays')) return;
       const now = new Date().getTime();
       let diff = Math.max(0, deadline - now);
       const days = Math.floor(diff / (1000*60*60*24));
@@ -224,15 +332,36 @@
       const mins = Math.floor(diff / (1000*60));
       diff -= mins*60*1000;
       const secs = Math.floor(diff / 1000);
-      const fmt = v => pad(v).toString();
-      const D = fmt(days), H = fmt(hours), M = fmt(mins), S = fmt(secs);
-      const fmtDir = v => isRTL ? toEastern(v) : v;
-      document.getElementById('ddays').textContent = fmtDir(D);
-      document.getElementById('dhours').textContent = fmtDir(H);
-      document.getElementById('dmins').textContent = fmtDir(M);
-      document.getElementById('dsecs').textContent = fmtDir(S);
+      document.getElementById('ddays').textContent = pad(days);
+      document.getElementById('dhours').textContent = pad(hours);
+      document.getElementById('dmins').textContent = pad(mins);
+      document.getElementById('dsecs').textContent = pad(secs);
     }
     tick(); setInterval(tick, 1000);
+  </script>
+
+  <script>
+    // === Announcements loader ===
+    const annWrap = document.getElementById('ann-wrap');
+    fetch('announcements.json', {cache: 'no-store'})
+      .then(r => r.ok ? r.json() : [])
+      .then(items => {
+        if (!Array.isArray(items)) return;
+        items.sort((a,b) => new Date(b.date) - new Date(a.date));
+        annWrap.innerHTML = items.slice(0,6).map(it => {
+          const tone = it.type==='deadline'?'border-danger':
+                       it.type==='update'?'border-warning':
+                       it.type==='schedule'?'border-info':'border-success';
+          const dateStr = new Date(it.date).toLocaleDateString();
+          return `
+            <div class="col-md-4">
+              <div class="announce-pill ${tone}">
+                <div class="small text-muted mb-1">${dateStr}</div>
+                ${it.text}
+              </div>
+            </div>`;
+        }).join('');
+      });
   </script>
 </body>
 </html>
