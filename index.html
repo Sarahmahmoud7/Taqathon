@@ -4,13 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Home · Taqathon</title>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <!-- Bootstrap 5 -->
+
+  <!-- Bootstrap 5 + Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-  <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
   <style>
@@ -33,8 +34,7 @@
   .shadow-soft{ box-shadow: 0 10px 30px rgba(0,0,0,.12); }
   .badge-soft{ background:rgba(9,200,153,.15); color:#0a7b60; border:1px solid rgba(9,200,153,.3); }
 
-  /* Gradient band and CTA */
-  .gb-band{ background: var(--brand-grad); }
+  /* CTA band */
   .cta-band{ background: var(--brand-grad); color:#042233; }
   .cta-band .btn{ background:#fff; border:0; color:#042233; font-weight:600; }
 
@@ -57,108 +57,99 @@
   .announce-pill.border-info{ border-color:#bedbff; color:#164a86; }
   .announce-pill.border-danger{ border-color:#ffd0d0; color:#8e2121; }
 
-  /* About section */
+  /* About list icons */
   .about-list .bi{ color: var(--brand-green); margin-right:.5rem; }
 
   /* Footer */
   footer{ background: var(--brand-dark); color:#cfd6df; }
   footer a{ color:#cfd6df; text-decoration:none; }
 
-  /* General elements */
+  /* General */
   .hero-img{ border-radius: 1rem; box-shadow: 0 18px 40px rgba(0,0,0,.18); }
   .text-secondary{ color:var(--muted)!important; }
 
-  /* Buttons */
-  .btn-brand{
-    background:var(--brand-blue);
-    border-color:var(--brand-blue);
-    color:#fff;
+  /* Navbar */
+  .navbar{
+    background:#fff;
+    box-shadow:0 2px 10px rgba(0,0,0,.04);
+    padding-top:.4rem;
+    padding-bottom:.4rem;
   }
-  .btn-brand:hover{ filter:brightness(.95); }
+  .logo-mark{ height:60px; width:auto; object-fit:contain; }
+  .assoc-logo{ height:48px; width:auto; object-fit:contain; }
+  .navbar-brand img{ vertical-align:middle; }
+  .navbar-nav .nav-link{
+    font-weight:500;
+    color:var(--brand-dark);
+    transition:.2s;
+  }
+  .navbar-nav .nav-link:hover,
+  .navbar-nav .nav-link.active{
+    color:var(--brand-blue);
+  }
 
-   /* Navbar */
-    .navbar{
-      background:#fff;
-      box-shadow:0 2px 10px rgba(0,0,0,.04);
-      padding-top:.4rem;
-      padding-bottom:.4rem;
-    }
+  
 
-    .logo-mark{
-      height:60px;
-      width:auto;
-      object-fit:contain;
-    }
 
-    .assoc-logo{
-      height:48px;
-      width:auto;
-      object-fit:contain;
-    }
+  /* === AR language button (independent) === */
+  .btn-lang{
+    background:var(--brand-blue);
+    color:#ffffff !important;
+    border:none;
+    border-radius:.4rem;
+    padding:.35rem .9rem;
+    font-weight:500;
+    transition:.2s;
+  }
+  .btn-lang:hover{
+    background:var(--brand-green);
+    color:#fff !important;
+  }
 
-    .navbar-brand img{
-      vertical-align:middle;
-    }
+  /* Hero image (one place) */
+  .hero-img{
+    display:block;
+    width:100%;
+    height:clamp(260px, 35vw, 520px);
+    object-fit:cover;
+    object-position:center;
+  }
 
-    .navbar-nav .nav-link{
-      font-weight:500;
-      color:var(--dark-blue);
-      transition:.2s;
-    }
-    .navbar-nav .nav-link:hover,
-    .navbar-nav .nav-link.active{
-      color:var(--brand-blue);
-    }
-
-    .btn-brand{
-      background:var(--brand-blue);
-      color:#fff !important;
-      border:none;
-      border-radius:.4rem;
-      padding:.4rem .9rem;
-      font-weight:500;
-    }
-
-    .btn-brand:hover{
-      opacity:.9;
-    }
-
-/* Hero image (consolidated once) */
-.hero-img{
-  display:block;
-  width:100%;
-  height:clamp(260px, 35vw, 520px);
-  object-fit:cover;
-  object-position:center;
+  /* Countdown section: neutral background; centered rounded box */
+  .gb-band{ background:transparent; }
+ /* Animated gradient countdown box */
+.count-box{
+  background:linear-gradient(135deg, #09C899, #007DFD, #09C899);
+  background-size:300% 300%;           /* makes animation smooth */
   border-radius:1rem;
-  box-shadow:0 18px 40px rgba(0,0,0,.18);
+  max-width:650px;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+  animation:gradientMove 15s ease infinite; /* duration + looping */
 }
 
-/* (Removed the unused `.hero .col-lg-6 { display:block; }` rule) */
-/* === AR language button === */
-.btn-lang{
-  background:var(--brand-grad);                    /* gradient background */
-  color:#ffffff !important;           /* white text */
-  border:none;           
-  border-radius:.4rem;
-  padding:.35rem .9rem;
-  font-weight:500;
-  transition:.2s;
+/* Smooth white overlays for contrast */
+.count-box .count-tile{
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.25);
+}
+.count-box .count-label{
+  color:rgba(255,255,255,.9);
 }
 
-.btn-lang:hover{
-  background:#09C899;                 /* brand green on hover */
-  color:#fff !important;              /* white text when hovered */
-  border-color:#09C899;
+/* Keyframes for gradient motion */
+@keyframes gradientMove {
+  0%   { background-position:0% 50%; }
+  50%  { background-position:100% 50%; }
+  100% { background-position:0% 50%; }
 }
 
 
-</style>
-
+  </style>
 </head>
+
 <body>
-    <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg sticky-top">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container d-flex align-items-center justify-content-between">
 
       <!-- Left: Taqathon logo -->
@@ -166,12 +157,13 @@
         <img src="assets/taqathon-logo.png" alt="Taqathon logo" class="logo-mark">
       </a>
 
-      <!-- Navbar links (center) -->
+      <!-- Toggler -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
               aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
+      <!-- Center: nav links -->
       <div class="collapse navbar-collapse justify-content-center" id="mainNav">
         <ul class="navbar-nav mb-2 mb-lg-0 align-items-lg-center">
           <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
@@ -181,14 +173,13 @@
           <li class="nav-item"><a class="nav-link" href="rules.html">Rules & Resources</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
           <li class="nav-item ms-3">
-  <a class="btn btn-sm btn-lang" href="index-ar.html">AR</a>
-</li>
-
+            <a class="btn btn-sm btn-lang" href="index-ar.html">AR</a>
+          </li>
         </ul>
       </div>
 
-      <!-- Right: Association logo (always visible) -->
-      <a href="https://taqa.org.sa" target="_blank" rel="noopener" class="d-none d-lg-block">
+      <!-- Right: Association logo (visible on all sizes) -->
+      <a href="https://taqa.org.sa" target="_blank" rel="noopener" class="d-block">
         <img src="assets/association-logo.png" alt="Energy Association for Sustainable Development" class="assoc-logo">
       </a>
 
@@ -211,37 +202,54 @@
           <div class="d-flex flex-wrap gap-2 mt-3">
             <a class="btn btn-success" href="contract.html"><i class="bi bi-file-earmark-text me-1"></i> Sign Contract</a>
             <a class="btn btn-outline-secondary" href="rules.html"><i class="bi bi-journal-text me-1"></i> View Rules</a>
-            <a class="btn btn-brand text-white" href="submissions.html"><i class="bi bi-rocket-takeoff me-1"></i> Submit Project</a>
+            <a class="btn btn-warning text-white" href="submissions.html">
+  <i class="bi bi-rocket-takeoff me-1"></i> Submit Project
+</a>
+
           </div>
         </div>
         <div class="col-lg-6">
           <img class="w-100 hero-img"
-     src="assets/hero-wind.jpg"
-     alt="Wind turbines in Saudi Arabia generating clean energy"
-     loading="eager"
-     decoding="async"
-     width="1600"
-     height="1000">
+               src="assets/hero-wind.jpg"
+               alt="Wind turbines in Saudi Arabia generating clean energy"
+               loading="eager"
+               decoding="async"
+               width="1600" height="1000">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- GRADIENT BAND + COUNTDOWN -->
+  <!-- COUNTDOWN (centered rounded card) -->
   <section class="gb-band py-5">
-    <div class="container text-center text-white">
-      <div class="mb-2 fw-semibold">Final Submission Deadline</div>
-      <div id="deadline" class="d-flex justify-content-center align-items-center gap-3" data-deadline="2025-11-29T23:59:59+03:00">
-        <div class="text-center"><div class="count-tile"><span id="ddays">00</span></div><div class="count-label">Days</div></div>
-        <div class="text-center"><div class="count-tile"><span id="dhours">00</span></div><div class="count-label">Hours</div></div>
-        <div class="text-center"><div class="count-tile"><span id="dmins">00</span></div><div class="count-label">Mins</div></div>
-        <div class="text-center"><div class="count-tile"><span id="dsecs">00</span></div><div class="count-label">Secs</div></div>
+    <div class="container text-center">
+      <div class="count-box mx-auto p-4 text-white">
+        <div class="mb-2 fw-semibold">Final Submission Deadline</div>
+        <div id="deadline" class="d-flex justify-content-center align-items-center gap-3"
+             data-deadline="2025-11-29T23:59:59+03:00">
+          <div class="text-center">
+            <div class="count-tile"><span id="ddays">00</span></div>
+            <div class="count-label">Days</div>
+          </div>
+          <div class="text-center">
+            <div class="count-tile"><span id="dhours">00</span></div>
+            <div class="count-label">Hours</div>
+          </div>
+          <div class="text-center">
+            <div class="count-tile"><span id="dmins">00</span></div>
+            <div class="count-label">Mins</div>
+          </div>
+          <div class="text-center">
+            <div class="count-tile"><span id="dsecs">00</span></div>
+            <div class="count-label">Secs</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ANNOUNCEMENTS -->
-  <section class="py-4">
+  <section class="py-5">
     <div class="container">
       <div class="text-center text-secondary mb-3">Announcements</div>
       <div id="ann-wrap" class="row g-3"><!-- Pills injected via JS --></div>
@@ -254,13 +262,10 @@
       <div class="row g-4 align-items-center">
         <div class="col-lg-6">
           <img class="w-100 rounded-4 shadow-sm"
-     src="assets/about-solar.jpg"
-     alt="Aerial view of solar panels in Saudi Arabia"
-     loading="lazy"
-     decoding="async"
-     width="1400"
-     height="500">
-
+               src="assets/about-solar.jpg"
+               alt="Aerial view of solar panels in Saudi Arabia"
+               loading="lazy" decoding="async"
+               width="1400" height="500">
         </div>
         <div class="col-lg-6">
           <h5>What You’ll Do in Taqathon</h5>
@@ -315,6 +320,7 @@
     </div>
   </footer>
 
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
