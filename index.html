@@ -48,14 +48,34 @@
   }
   .count-label{ font-size:.8rem; color: rgba(255,255,255,.9); }
 
-  /* Announcement pills */
-  .announce-pill{
-    background:#fff; border:1px solid #d6e8ff; color:#164a86; border-radius:.75rem; padding:.75rem 1rem;
-  }
-  .announce-pill.border-success{ border-color:#bfeee1; color:#0a7b60; }
-  .announce-pill.border-warning{ border-color:#ffe5b7; color:#8a5a14; }
-  .announce-pill.border-info{ border-color:#bedbff; color:#164a86; }
-  .announce-pill.border-danger{ border-color:#ffd0d0; color:#8e2121; }
+  /* Announcements — clean cards */
+.ann-list{
+  max-width:900px;
+  margin:0 auto;
+  display:grid;
+  gap:12px;
+}
+.ann-card{
+  position:relative;
+  background:#fff;
+  border:1px solid #e7eef7;
+  border-radius:12px;
+  padding:16px 16px 16px 56px;
+  box-shadow:0 6px 18px rgba(0,0,0,.06);
+}
+.ann-icon{
+  position:absolute; left:16px; top:16px;
+  width:28px; height:28px; border-radius:8px;
+  display:grid; place-items:center; font-size:16px;
+}
+.ann-date{ font-size:.8rem; color:#6c7a8a; }
+.ann-text{ color:#1d2733; }
+
+/* Type colors */
+.type-deadline .ann-icon{ background:#FFE8E8; color:#BB2D3B; }
+.type-update  .ann-icon{ background:#FFF3D6; color:#8A5A14; }
+.type-schedule .ann-icon{ background:#E7F0FF; color:#0D6EFD; }
+.type-general .ann-icon{ background:#E6FAF3; color:#0A7B60; }
 
   /* About list icons */
   .about-list .bi{ color: var(--brand-green); margin-right:.5rem; }
@@ -142,6 +162,10 @@
   50%  { background-position:100% 50%; }
   100% { background-position:0% 50%; }
 }
+.about-list .bi-lightbulb { color:#FFD43B; }        /* yellow = ideas */
+.about-list .bi-person-lines-fill { color:#007DFD; } /* blue = mentorship */
+.about-list .bi-trophy-fill { color:#E67E22; }       /* orange = prizes */
+.about-list .bi-building-check { color:#09C899; }    /* green = adoption */
 
 
   </style>
@@ -249,12 +273,13 @@
   </section>
 
   <!-- ANNOUNCEMENTS -->
-  <section class="py-5">
-    <div class="container">
-      <div class="text-center text-secondary mb-3">Announcements</div>
-      <div id="ann-wrap" class="row g-3"><!-- Pills injected via JS --></div>
-    </div>
-  </section>
+<section class="py-5" id="announcements">
+  <div class="container">
+    <div class="text-center text-secondary mb-3">Announcements</div>
+    <div id="ann-wrap" class="ann-list"><!-- injected by JS --></div>
+  </div>
+</section>
+
 
   <!-- ABOUT -->
   <section class="py-5">
@@ -274,14 +299,16 @@
             and geared toward real-world adoption in line with Vision 2030.
           </p>
           <div class="row">
-            <div class="col-6 about-list">
-              <div class="mb-2"><i class="bi bi-check-circle"></i> Expert-led workshops (e.g., KAUST, ARAMCO, SABIC)</div>
-              <div class="mb-2"><i class="bi bi-check-circle"></i> Mentorship and technical guidance</div>
-            </div>
-            <div class="col-6 about-list">
-              <div class="mb-2"><i class="bi bi-check-circle"></i> Compete for SAR 18k / 12k / 9k prizes</div>
-              <div class="mb-2"><i class="bi bi-check-circle"></i> Potential adoption by major companies</div>
-            </div>
+  <div class="col-6 about-list">
+    <div class="mb-2"><i class="bi bi-lightbulb"></i> Expert-led workshops (e.g., KAUST, ARAMCO, SABIC)</div>
+    <div class="mb-2"><i class="bi bi-person-lines-fill"></i> Mentorship and technical guidance</div>
+  </div>
+  <div class="col-6 about-list">
+    <div class="mb-2"><i class="bi bi-trophy-fill"></i> Compete for SAR 18k / 12k / 9k prizes</div>
+    <div class="mb-2"><i class="bi bi-building-check"></i> Potential adoption by major companies</div>
+  </div>
+</div>
+
           </div>
         </div>
       </div>
@@ -346,28 +373,40 @@
     tick(); setInterval(tick, 1000);
   </script>
 
-  <script>
-    // === Announcements loader ===
-    const annWrap = document.getElementById('ann-wrap');
-    fetch('announcements.json', {cache: 'no-store'})
-      .then(r => r.ok ? r.json() : [])
-      .then(items => {
-        if (!Array.isArray(items)) return;
-        items.sort((a,b) => new Date(b.date) - new Date(a.date));
-        annWrap.innerHTML = items.slice(0,6).map(it => {
-          const tone = it.type==='deadline'?'border-danger':
-                       it.type==='update'?'border-warning':
-                       it.type==='schedule'?'border-info':'border-success';
-          const dateStr = new Date(it.date).toLocaleDateString();
-          return `
-            <div class="col-md-4">
-              <div class="announce-pill ${tone}">
-                <div class="small text-muted mb-1">${dateStr}</div>
-                ${it.text}
-              </div>
-            </div>`;
-        }).join('');
-      });
-  </script>
+ <script>
+  // === Announcements loader (clean cards) ===
+  const annWrap = document.getElementById('ann-wrap');
+  fetch('announcements.json', { cache: 'no-store' })
+    .then(r => r.ok ? r.json() : [])
+    .then(items => {
+      if (!Array.isArray(items)) return;
+
+      // newest first
+      items.sort((a,b) => new Date(b.date) - new Date(a.date));
+
+      const iconByType = {
+        deadline: 'bi-alarm',
+        update:   'bi-megaphone',
+        schedule: 'bi-calendar-event',
+        general:  'bi-info-circle'
+      };
+
+      annWrap.innerHTML = items.slice(0, 8).map(it => {
+        const t = (it.type || 'general').toLowerCase();
+        const cls = ['deadline','update','schedule'].includes(t) ? t : 'general';
+        const icon = iconByType[cls] || iconByType.general;
+        const dateStr = new Date(it.date).toLocaleDateString();
+
+        return `
+          <div class="ann-card type-${cls}">
+            <div class="ann-icon"><i class="bi ${icon}"></i></div>
+            ${it.date ? `<div class="ann-date mb-1">${dateStr}</div>` : ''}
+            <div class="ann-text">${it.text}</div>
+          </div>
+        `;
+      }).join('');
+    });
+</script>
+
 </body>
 </html>
